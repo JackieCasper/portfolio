@@ -12,7 +12,13 @@ $(() => {
 
   $('.nav-button').click(() => {
     $('nav.mobile').toggleClass('open');
+  });
+
+  $(window).resize(() => {
+    $(window).scroll();
   })
+
+
 
   // create a size handler that gets certain needed sizes when asked
   const sizeHandler = {
@@ -69,6 +75,22 @@ $(() => {
     // handle the nav stuff
     nav: {
       $nav: $('nav.desktop'),
+      groups: [
+        {
+          $group: $('.nav-group').first(),
+          startOffset: function () {
+            return ($('nav.desktop').width() / 2) - this.$group.width() - 15;
+          },
+          side: 'left'
+        },
+        {
+          $group: $('.nav-group').last(),
+          startOffset: function () {
+            return ($('nav.desktop').width() / 2) - this.$group.width() - 15;
+          },
+          side: 'right'
+        }
+      ],
       fixed: false,
       // on scroll
       scroll: function (scrollTop) {
@@ -89,9 +111,14 @@ $(() => {
           this.$nav.css({
             position: 'absolute',
             top: 'auto'
-
           });
 
+        }
+        if (scrollTop < sizeHandler.headerHeight()) {
+          this.groups.forEach(function (group) {
+            const currentOffset = group.startOffset() - (group.startOffset() / sizeHandler.headerHeight() * scrollTop);
+            group.$group.css(group.side, currentOffset + 'px');
+          });
         }
       }
     }
@@ -166,5 +193,7 @@ $(() => {
       })
     }
   }
+
+  headerHandler.nav.scroll(0);
 
 })
