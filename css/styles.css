@@ -109,6 +109,7 @@ nav.desktop {
   -ms-justify-content: space-between;
   -o-justify-content: space-between;
   justify-content: space-between;
+  margin: 0 auto;
   margin-top: 60px;
   max-width: 1220px;
   padding: 20px;
