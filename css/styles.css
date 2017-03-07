@@ -1,6 +1,7 @@
 body,
 html {
   background-color: #ddd;
+  color: #444;
   font-family: sans-serif;
   height: 100vh;
   margin: 0 auto;
@@ -36,13 +37,13 @@ h1 {
   color: white;
   font-size: 4em;
   position: fixed;
-  margin: 20px auto;
+  margin: 0 auto;
+  top: 20px;
   text-align: center;
-  padding: 0 10px;
   z-index: 5;
 }
 
-nav {
+nav.desktop {
   background-color: #666;
   box-shadow: 0 0 20px rgba(0, 0, 0, .4);
   display: -webkit-flex;
@@ -56,7 +57,7 @@ nav {
   -ms-justify-content: space-between;
   -o-justify-content: space-between;
   justify-content: space-between;
-  top: 0;
+  position: absolute;
   width: 100%;
   z-index: 4;
 }
@@ -108,10 +109,97 @@ nav {
   -ms-justify-content: space-between;
   -o-justify-content: space-between;
   justify-content: space-between;
-  margin: 0 auto;
+  margin-top: 60px;
   max-width: 1220px;
   padding: 20px;
   z-index: 2;
+}
+
+nav.mobile {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  left: 0px;
+  position: fixed;
+  top: 0;
+  z-index: 5;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  transition: all 1s ease;
+}
+
+nav.mobile.open {
+  background-color: #ddd;
+  overflow: hidden;
+}
+
+.nav-button {
+  background-image: url(../img/nav.svg);
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  background-color: #666;
+  height: 40px;
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  width: 40px;
+  z-index: 7;
+}
+
+.open>.nav-button {
+  background-image: url(../img/close.svg);
+}
+
+.nav-links {
+  -ms-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  height: 0;
+  overflow: hidden;
+  padding: 30px 0;
+  width: 0;
+  z-index: -2;
+  opacity: 0;
+  transition: all 1s ease;
+}
+
+.nav-links>a {
+  border-bottom: 1px solid #444;
+  color: #444;
+  font-size: 1.2em;
+  padding: 10px;
+  text-decoration: none;
+  transition: all 1s ease;
+}
+
+.nav-links>a:first-of-type {
+  border-top: 1px solid #444;
+}
+
+nav.mobile.open>.nav-links {
+  height: 30vh;
+  opacity: 1;
+  width: auto;
+  z-index: 6;
 }
 
 h2 {
@@ -349,6 +437,10 @@ span {
 }
 
 @media screen and (max-width: 790px) {
+  h1 {
+    font-size: 3em;
+    top: 120px;
+  }
   .skill-section {
     margin: 10px auto;
     max-width: 500px;
@@ -394,5 +486,9 @@ span {
     -ms-justify-content: center;
     -o-justify-content: center;
     justify-content: center;
+  }
+  nav.mobile {
+    width: 100%;
+    height: auto;
   }
 }

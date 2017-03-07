@@ -10,11 +10,18 @@ $(() => {
     workHandler.scroll(scrollTop);
   })
 
+  $('.nav-button').click(() => {
+    $('nav.mobile').toggleClass('open');
+  })
+
   // create a size handler that gets certain needed sizes when asked
   const sizeHandler = {
     vph: () => $(window).innerHeight(),
     vpw: () => $(window).innerWidth(),
-    headerHeight: () => $('header').height()
+    headerHeight: () => $('header').height(),
+    breakPoint: function () {
+      return this.vpw() < 790 ? true : false;
+    }
   }
 
   // to handle header stuff
@@ -25,34 +32,43 @@ $(() => {
       finalSize: 1.7,
       startSize: 4,
       currentSize: 4,
-      startMargin: 20,
-      finalMargin: 10,
-      currentMargin: 20,
+      startTop: 20,
+      finalTop: 5,
+      currentTop: 20,
       // on scroll
       scroll: function (scrollTop) {
+        if (sizeHandler.breakPoint()) {
+          this.startSize = 3;
+          this.finalTop = 10;
+          this.startTop = 120;
+
+        } else {
+          this.startSize = 4;
+          this.finalTop = 5;
+          this.startTop = 20;
+        }
         // if its still showing the header
         if (scrollTop < sizeHandler.headerHeight()) {
+
           // set the current size of the h1 based on how much the page is scrolled
           this.currentSize = (this.startSize - ((this.startSize - this.finalSize) / sizeHandler.headerHeight()) * scrollTop) || this.startSize;
-          // set the margin based on how much the page has scrolled
-          this.currentMargin = (this.startMargin - ((this.startMargin - this.finalMargin) / sizeHandler.headerHeight()) * scrollTop) || this.startMargin;
-
+          this.currentTop = (this.startTop - ((this.startTop - this.finalTop) / sizeHandler.headerHeight()) * scrollTop);
           // if its not still showing the header
         } else {
           // size and margin are the end size and margin
           this.currentSize = this.finalSize;
-          this.currentMargin = this.finalMargin;
+          this.currentTop = this.finalTop;
         }
         // set the css values
         this.$h1.css({
           fontSize: this.currentSize + 'em',
-          margin: this.currentMargin + 'px auto'
+          top: this.currentTop + 'px'
         });
       }
     },
     // handle the nav stuff
     nav: {
-      $nav: $('nav'),
+      $nav: $('nav.desktop'),
       fixed: false,
       // on scroll
       scroll: function (scrollTop) {
@@ -60,14 +76,22 @@ $(() => {
         if (scrollTop >= sizeHandler.headerHeight() && !this.fixed) {
           // fix it
           this.fixed = true;
-          this.$nav.css('position', 'fixed');
-          $('.skills-section').css('margin-top', this.$nav.height() + 30 + 'px');
+          this.$nav.css({
+            position: 'fixed',
+            top: '0'
+          });
+          // stops bouncing on mobile
+          $(window).scrollTop(scrollTop + 5);
           // if it is fixed and it shouldn't be
         } else if (scrollTop < sizeHandler.headerHeight() && this.fixed) {
           // unfix it
           this.fixed = false;
-          this.$nav.css('position', 'static');
-          $('.skills-section').css('margin-top', '0px');
+          this.$nav.css({
+            position: 'absolute',
+            top: 'auto'
+
+          });
+
         }
       }
     }
@@ -142,4 +166,5 @@ $(() => {
       })
     }
   }
+
 })
