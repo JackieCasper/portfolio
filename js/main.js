@@ -1,6 +1,7 @@
 $(() => {
-  // set scroll event listener
-  $(window).scroll(() => {
+
+
+  const scroll = ()=>{
     // get scroll top
     const scrollTop = $(window).scrollTop();
     // handle all the scroll stuff
@@ -8,6 +9,11 @@ $(() => {
     headerHandler.nav.scroll(scrollTop);
     skillsHandler.scroll(scrollTop);
     workHandler.scroll(scrollTop);
+  }
+
+  // set scroll event listener
+  $(window).scroll(() => {
+    scroll();
   })
 
   $('.nav-button').click(() => {
@@ -18,7 +24,27 @@ $(() => {
     $(window).scroll();
   })
 
+  // copy email when email contact button is pressed
+  $('#email').click((e)=>{
+    $('#email-select').select();
+    document.execCommand('copy');
+    $('.notification').height(46)
+      .animate({top: "46px"})
+      .delay(1500)
+      .animate({top:"0px"})
+      .promise()
+      .done(()=> $('.notification').height(0));
+  })
 
+  // smooth link scrolling
+  $('.nav-group a').click((e)=>{
+    e.preventDefault();
+    const location = $($(e.target).attr('href')).offset().top;
+    $('#email-select').select();
+    $('html, body').animate({
+      scrollTop: location - 25
+    }, 1000);
+  })
 
   // create a size handler that gets certain needed sizes when asked
   const sizeHandler = {
@@ -81,21 +107,28 @@ $(() => {
           startOffset: function () {
             return ($('nav.desktop').width() / 2) - this.$group.width() - 15;
           },
-          side: 'left'
+          side: 'left',
+          endOffset: function(){
+            return $('nav.desktop').width() < 1200 ? 0 : (($('nav.desktop').width() - 1200)/ 2) - 20
+          }
         },
         {
           $group: $('.nav-group').last(),
           startOffset: function () {
             return ($('nav.desktop').width() / 2) - this.$group.width() - 15;
           },
-          side: 'right'
+          side: 'right',
+          endOffset: function(){
+            return ($('nav.desktop').width() < 1200 ? 0 : (($('nav.desktop').width() - 1200)/ 2) - 20)
+          }
         }
       ],
       fixed: false,
       // on scroll
       scroll: function (scrollTop) {
+
         // if its not fixed and it should be
-        if (scrollTop >= sizeHandler.headerHeight() && !this.fixed) {
+        if (scrollTop >= sizeHandler.headerHeight() - 10 && !this.fixed) {
           // fix it
           this.fixed = true;
           this.$nav.css({
@@ -105,7 +138,7 @@ $(() => {
           // stops bouncing on mobile
           $(window).scrollTop(scrollTop + 5);
           // if it is fixed and it shouldn't be
-        } else if (scrollTop < sizeHandler.headerHeight() && this.fixed) {
+        } else if (scrollTop < sizeHandler.headerHeight() - 10 && this.fixed) {
           // unfix it
           this.fixed = false;
           this.$nav.css({
@@ -114,11 +147,15 @@ $(() => {
           });
 
         }
-        if (scrollTop < sizeHandler.headerHeight()) {
+        if (scrollTop < sizeHandler.headerHeight() - 10) {
           this.groups.forEach(function (group) {
-            const currentOffset = group.startOffset() - (group.startOffset() / sizeHandler.headerHeight() * scrollTop);
+            const currentOffset = group.startOffset() - ((group.startOffset() - group.endOffset()) * (scrollTop / sizeHandler.headerHeight()));
             group.$group.css(group.side, currentOffset + 'px');
           });
+        } else {
+          this.groups.forEach(function (group) {
+            group.$group.css(group.side, group.endOffset());
+          })
         }
       }
     }
@@ -155,7 +192,7 @@ $(() => {
   // work work work work work
   const workHandler = {
     $workContents: $('.work-content'),
-    showing: [true, true, true],
+    showing: [true, true, true, true, true],
     // on scroll
     scroll: function (scrollTop) {
       const self = this;
@@ -181,19 +218,19 @@ $(() => {
           // if its out of the view and showing
         } else if (scrollTop + (sizeHandler.vph() / 2) <= top && self.showing[i]) {
           // set the css
-          $($work).css('margin-' + side, -width - 40 + 'px');
+          $($work).css('margin-' + side, -width - 80 + 'px');
           self.showing[i] = false;
 
           // if its out of the view the other way and showing
         } else if (scrollTop > bottom + 100 && self.showing[i]) {
           // set the css
-          $($work).css('margin-' + side, -width - 40 + 'px');
+          $($work).css('margin-' + side, -width - 80 + 'px');
           self.showing[i] = false;
         }
       })
     }
   }
 
-  headerHandler.nav.scroll(0);
+  scroll();
 
 })

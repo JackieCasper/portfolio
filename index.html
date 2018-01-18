@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jackie Casper</title>
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="css/styles.css">
   <script src="js/jquery.js"></script>
   <script src="js/main.js"></script>
@@ -16,52 +17,53 @@
   </header>
   <nav class="desktop">
     <div class="nav-group">
-      <a href="#">Skills</a>
-      <a href="#">Work</a>
+      <a href="#skills" class="underline-link">Skills</a>
+      <a href="#projects" class="underline-link">Projects</a>
     </div>
     <div class="nav-group">
-      <a href="#">About</a>
-      <a href="#">Contact</a>
+      <a href="#about" class="underline-link">About</a>
+      <a href="#contact" class="underline-link">Contact</a>
     </div>
   </nav>
   <nav class="mobile">
     <div class="nav-button"></div>
     <div class="nav-links">
       <a href="#">Skills</a>
-      <a href="#">Work</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
     </div>
 
   </nav>
-  <section class="skills-section">
+  <section class="skills-section" id="skills">
     <h2>My Skills</h2>
     <div class="skill-section">
-      <img class="skill-img" src="img/circle-icon.svg" />
+      <img class="skill-img" src="img/comp.svg" />
       <h3 class="skill-category">Front End</h3>
       <ul class="skill-list">
         <li>HTML</li>
         <li>CSS</li>
         <li>JavaScript</li>
         <li>JQuery</li>
-        <li>AngularJS</li>
+        <li>ReactJS</li>
         <li>Wordpress</li>
       </ul>
     </div>
     <div class="skill-section">
-      <img class="skill-img" src="img/circle-icon.svg" />
+      <img class="skill-img" src="img/server.svg" />
       <h3 class="skill-category">Back End</h3>
       <ul class="skill-list">
-        <li>PHP</li>
-        <li>AJax</li>
-        <li>SQL / MySQL</li>
         <li>NodeJS</li>
+        <li>Ruby / Rails</li>
+        <li>SQL / MySQL</li>
+        <li>PHP</li>
+        <li>Clojure</li>
         <li>C#</li>
         <li>LUA</li>
       </ul>
     </div>
     <div class="skill-section">
-      <img class="skill-img" src="img/circle-icon.svg" />
+      <img class="skill-img" src="img/mouse.svg" />
       <h3 class="skill-category">Graphic / 3D Software</h3>
       <ul class="skill-list">
         <li>Adobe Creative Cloud</li>
@@ -71,59 +73,85 @@
       </ul>
     </div>
   </section>
-  <section class="work-section">
-    <h2>My Work</h2>
-    <article class="work-item">
-      <div class="work-content hidden">
-        <h3 class="work-name">Work Name</h3>
-        <p class="work-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut congue egestas metus, vitae molestie eros luctus vitae. Fusce luctus commodo enim sit amet congue. Donec tellus orci, lacinia in enim ut, interdum iaculis lectus. Duis at pharetra eros. Nunc consectetur elit non imperdiet congue. </p>
-        <div class="view-buttons">
-          <a href="#" class="view-button"></a>
-          <a href="#" class="view-button"></a>
-        </div>
-      </div>
-    </article>
-    <article class="work-item">
+  <section class="work-section" id="projects">
+    <h2>My Projects</h2>
+
+    <article class="work-item" id="plix">
       <div class="work-content">
-        <h3 class="work-name">Work Name</h3>
-        <p class="work-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut congue egestas metus, vitae molestie eros luctus vitae. Fusce luctus commodo enim sit amet congue. Donec tellus orci, lacinia in enim ut, interdum iaculis lectus. Duis at pharetra eros. Nunc consectetur elit non imperdiet congue. </p>
+        <h3 class="work-name hidden">Plix</h3>
+        <p class="work-description">Plix is a location based social media application for sharing images and experiences. This project was built using Node.js in conjuncture with a few Google APIs<br /> <br>
+        Node packages: aws-sdk, bcrypt, body-parser, busboy-body-parser, dotenv, express, express-session, flash, morgan, mustache-express, node-fetch, passport, passport-local, pg-promise, sharp <br> <br>
+      APIs: Google Maps Geolocation API, Google Maps JavaScript API, Google Places API Web Service, Google Static Maps API</p>
         <div class="view-buttons">
-          <a href="#" class="view-button"></a>
-          <a href="#" class="view-button"></a>
+          <a href="https://murmuring-oasis-31919.herokuapp.com" target="_blank" class="view-button"></a>
+          <a href="https://git.generalassemb.ly/JackieCasper/turtle-project-2" target="_blank" class="view-button"></a>
         </div>
       </div>
 
     </article>
-    <article class="work-item">
+
+    <article class="work-item" id="back-end-socket">
       <div class="work-content">
-        <h3 class="work-name">Work Name</h3>
-        <p class="work-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut congue egestas metus, vitae molestie eros luctus vitae. Fusce luctus commodo enim sit amet congue. Donec tellus orci, lacinia in enim ut, interdum iaculis lectus. Duis at pharetra eros. Nunc consectetur elit non imperdiet congue. </p>
+        <h3 class="work-name">Back End Socket</h3>
+        <p class="work-description">Back End Socket is a online multi-player card game based off of the game A$$hole. It was built using a Rails backend and a React / Redux front end. It utilizes Action Cable to give live updates to players as each turn is played. Players can also talk to each other in their game's chat room.
+        </p>
         <div class="view-buttons">
-          <a href="#" class="view-button"></a>
-          <a href="#" class="view-button"></a>
+          <a href="https://turtle.surge.sh/" target="_blank" class="view-button"></a>
+          <a href="https://github.com/JackieCasper/Concrete_Jungle" target="_blank" class="view-button"></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="work-item" id="mine-flood">
+      <div class="work-content">
+        <h3 class="work-name">Mine Flood</h3>
+        <p class="work-description">Mine Flood is a  two-part game based on Minesweeper and Color Flood. Its multi-level system allows players to save their progress and see their best times.</p>
+        <div class="view-buttons">
+          <a href="https://git.generalassemb.ly/pages/JackieCasper/Project-One/" target="_blank" class="view-button"></a>
+          <a href="https://git.generalassemb.ly/JackieCasper/Project-One" target="_blank" class="view-button"></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="work-item" id="nfc">
+      <div class="work-content">
+        <h3 class="work-name">Neon Fox</h3>
+        <p class="work-description">The client for NFC required a site to display key information about his company. It was also important that he could easily change or update the site himself. <br><br />
+Using WordPress, I worked with a designer to create a theme from scratch that was tailored to his needs. I incorporated custom controls for WordPress's customizer so he could alter any aspect of the site and view the results before committing them.</p>
+        <div class="view-buttons">
+          <a href="http://neonfoxconsulting.com/wp/" target="_blank" class="view-button"></a>
         </div>
       </div>
     </article>
 
   </section>
-  <section class="about-section">
+  <section class="about-section" id="about">
     <div class="about-content">
       <h2>About Me</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut congue egestas metus, vitae molestie eros luctus vitae. Fusce luctus commodo enim sit amet congue. Donec tellus orci, lacinia in enim ut, interdum iaculis lectus. Duis at pharetra eros. Nunc consectetur elit non imperdiet congue. Maecenas pharetra nisi quam, eget imperdiet lacus varius efficitur. Proin vehicula arcu et purus placerat, a hendrerit nulla luctus. Mauris id sagittis tortor. Fusce facilisis lacus massa, posuere condimentum lorem placerat sed.</p>
+      <p>
+        I am a fast learner, and always eager for new knowledge. I am passionate and enthusiastic about programming and take every chance I get to expand my abilities. Every challenge I face is an opportunity to learn a solution. I approach my work with care, and take pride in making sure each project I build is perfectly executed.
+      </p>
+      <p>
+        With a background in design, I have always been inspired by innovation and creativity. After becoming an active member of a video game community, I directed my creativity towards crafting modifications for a multi-player game called "Rust". I was able to self teach myself enough to build scripts that became helpful tools to assist server admins and improve game-play. Throughout this process I found that I had a love and an affinity for development. After a period of learning on my own, I took a course at General Assembly to further build on my talents.
+      </p>
     </div>
-
   </section>
-  <footer>
+  <footer id="contact">
     <h2>Contact Me</h2>
     <div class="contact-buttons">
-      <a href="#" class="contact-button"></a>
-      <a href="#" class="contact-button"></a>
+      <a href="https://github.com/JackieCasper" class="contact-button"></a>
+      <a href="https://www.linkedin.com/in/jackie-casper/" class="contact-button" id="linkedin"></a>
+      <div class="contact-button" id="email"></div>
     </div>
-    <p class="contact-item"><span class="contact-label">Email:</span> Casper.Jaclyn@gmail.com</p>
 
-    <a class="resume" href="#">Resume</a>
-
+    <a class="resume underline-link" href="Jackie-Casper-Resume.pdf" target="_blank">Resume</a>
+    <textarea id="email-select">casper.jaclyn@gmail.com</textarea>
   </footer>
+  <div class="notification">
+    <div class="notification-content">
+      Email copied to clipboard!
+    </div>
+  </div>
 
 
 </body>
